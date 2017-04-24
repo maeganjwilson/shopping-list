@@ -13,17 +13,24 @@ var state = {
 };
 
 // FUNCTIONS
-function addItem(){
+var addItem = function(state, item) {
+  state.items.push(item);
+};
 
+var removeItem = function(state, item){
+  //NEED TO LOOK INSIDE STATE FIND STATE AND REMOVE
 }
 
-function removeItem(){
-
+var checkItem = function(state, item){
+  /*
+  *
+  * NEED TO LOOK INSIDE STATE FIND STATE AND TOGGLE THE
+  * shopping-item__checked class
+  *
+  */
 }
 
-function checkItem(){
-
-}
+// RENDER
 
 // Event listeners
 // Add
