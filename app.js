@@ -9,38 +9,40 @@
 
 // STATE
 var state = {
-    items: []
+  items: []
 };
 
 // FUNCTIONS
 var addItem = function(state, item) {
-     var temp = '<li>'+
-            '<span class="shopping-item">'+item+'</span>'+
-            '<div class="shopping-item-controls">'+
-                '<button class="shopping-item-toggle">'+
-                    '<span class="button-label">check</span>'+
-                '</button>'
-                '<button class="shopping-item-delete">'+
-                    '<span class="button-label">delete</span>'+
-                '</button>'+
-            '</div>'+
-            '</li>';
+  var temp = '<li>' +
+    '<span class="shopping-item">' + item + '</span>' +
+    '<div class="shopping-item-controls">' +
+    '<button class="shopping-item-toggle">' +
+    '<span class="button-label">check</span>' +
+    '</button>' +
+    '<button class="shopping-item-delete">' +
+    '<span class="button-label">delete</span>' +
+    '</button>' +
+    '</div>' +
+    '</li>';
+
+  state.push(temp);
 };
 
 var removeItem = function(state, item) {
-    //NEED TO LOOK INSIDE STATE FIND ITEM AND REMOVE
-    //Will need position
-    item.splice(i, 1);
+  //NEED TO LOOK INSIDE STATE FIND ITEM AND REMOVE
+  //Will need position
+  item.splice(i, 1);
 }
 
 var checkItem = function(state, item) {
-    /*
-     *
-     * NEED TO LOOK INSIDE STATE FIND STATE AND TOGGLE THE
-     * shopping-item__checked class
-     * NEED ITEM
-     *
-     */
+  /*
+   *
+   * NEED TO LOOK INSIDE STATE FIND STATE AND TOGGLE THE
+   * shopping-item__checked class
+   * NEED ITEM
+   *
+   */
 }
 
 // RENDER
