@@ -24,7 +24,7 @@ var addItem = function(state, item) {
                     '<span class="button-label">delete</span>'+
                 '</button>'+
             '</div>'+
-            '</li>'
+            '</li>';
 };
 
 var removeItem = function(state, item) {
