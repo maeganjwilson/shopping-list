@@ -26,7 +26,20 @@ var state = {
   items: []
 };
 
-//FUNCTION TO ADD
+var itemIndex = function(state, item){
+  function findItem(it) {
+    return state.itemName === item;
+  }
+  
+  state.findIndex(findItem);
+};
+
+/*******************
+*
+* Functions
+*
+*******************/
+
 var addItem = function(state, item) {
   state.items.push({
     itemName: item,
@@ -35,23 +48,36 @@ var addItem = function(state, item) {
 };
 
 //TO CHECK
-var checkItem(state, item){
+var checkItem(state, itemIndex){
   //Need to change checked to true
+  //Will need index of item to check
+  state[itemIndex].checked = true;
 };
+
 //TO REMOVE
 var deleteItem(state, itemIndex){
   //Remove item from array
   // there is a splice method I can use
+  //Will need index of item to remobve
+  state.splice(itemIndex, 1);
 };
 
-// RENDER
+/*******************
+*
+* Render
+*
+*******************/
+
 var renderList = function(state, element) {
   //Goes through each item and outputs the array
 };
 
-//----------------
-// Event listeners
-//
+/*******************
+*
+* Event listeners
+*
+*******************/
+
 // Add
 $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
