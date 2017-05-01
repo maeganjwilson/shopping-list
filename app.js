@@ -6,77 +6,38 @@
  *  4. Remove item
  *
  *******/
-//template
-var listItemTemplate = (
-  '<li>' +
-    '<span class="shopping-item"></span>' +
-      '<div class="shopping-item-controls">' +
-      '<button class="shopping-item-toggle">' +
-        '<span class="button-label">check</span>' +
-      '</button>' +
-      '<button class="shopping-item-delete">' +
-        '<span class="button-label">delete</span>' +
-      '</button>' +
-    '</div>' +
-  '</li>'
-);
 
-/*******************
-*
-* STATE
-*
-*******************/
-
+// STATE
 var state = {
   items: []
 };
 
+// FUNCTIONS
 var addItem = function(state, item) {
-  state.items.push({
-    itemName: item,
-    checked: false //added to keep track of an item that is checked/not checked
-  });
+  state.items.push(item);
 };
 
-var getItem = function(state, itemIndex) {
-  return state.items[itemIndex];
-}
-
-var deleteItem = function(state, itemIndex){
-  state.splice(itemIndex, 1);
+// RENDER
+var renderList = function(state, element) {
+    var itemsHTML = state.items.map(function(item) {
+      return '<li>' +
+        '<span class="shopping-item">' + item + '</span>' +
+        '<div class="shopping-item-controls">' +
+        '<button class="shopping-item-toggle">' +
+        '<span class="button-label">check</span>' +
+        '</button>' +
+        '<button class="shopping-item-delete">' +
+        '<span class="button-label">delete</span>' +
+        '</button>' +
+        '</div>' +
+        '</li>';
+    });
+    element.html(itemsHTML);
 };
-
-/*******************
-*
-* Render
-*
-*******************/
-
-var renderItem = function(state,sList,sItem,itemIndex,listItemTemplate){
-  $('.shopping-list').add(listItemTemplate);
-  $('.shopping-item').after(state[itemIndex].itemName);
-};
-
-var renderList = function(state, renderItem) {
-  //Goes through each item and outputs the array
-
-};
-
-/*******************
-*
-* Event listeners
-*
-*******************/
-
+// Event listeners
 // Add
 $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
     addItem(state, $('#shopping-list-entry').val());
-    renderItem(state);
-    renderList(state);
-});
-
-//check
-$('.shopping-item-toggle').click(function(event) {
-  checkItem(state, this.parent('li').val());
+    renderList(state, $('.shopping-list'));
 });
