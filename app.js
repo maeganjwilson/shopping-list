@@ -21,24 +21,15 @@ var listItemTemplate = (
   '</li>'
 );
 
-// STATE
+/*******************
+*
+* STATE
+*
+*******************/
+
 var state = {
   items: []
 };
-
-var itemIndex = function(state, item){
-  function findItem(it) {
-    return state.itemName === item;
-  }
-  
-  state.findIndex(findItem);
-};
-
-/*******************
-*
-* Functions
-*
-*******************/
 
 var addItem = function(state, item) {
   state.items.push({
@@ -47,18 +38,11 @@ var addItem = function(state, item) {
   });
 };
 
-//TO CHECK
-var checkItem(state, itemIndex){
-  //Need to change checked to true
-  //Will need index of item to check
-  state[itemIndex].checked = true;
-};
+var getItem = function(state, itemIndex) {
+  return state.items[itemIndex];
+}
 
-//TO REMOVE
-var deleteItem(state, itemIndex){
-  //Remove item from array
-  // there is a splice method I can use
-  //Will need index of item to remobve
+var deleteItem = function(state, itemIndex){
   state.splice(itemIndex, 1);
 };
 
@@ -68,8 +52,14 @@ var deleteItem(state, itemIndex){
 *
 *******************/
 
-var renderList = function(state, element) {
+var renderItem = function(state,sList,sItem,itemIndex,listItemTemplate){
+  $('.shopping-list').add(listItemTemplate);
+  $('.shopping-item').after(state[itemIndex].itemName);
+};
+
+var renderList = function(state, renderItem) {
   //Goes through each item and outputs the array
+
 };
 
 /*******************
@@ -82,7 +72,8 @@ var renderList = function(state, element) {
 $('#js-shopping-list-form').submit(function(event) {
     event.preventDefault();
     addItem(state, $('#shopping-list-entry').val());
-    renderList(state, $('.shopping-list'));
+    renderItem(state);
+    renderList(state);
 });
 
 //check
