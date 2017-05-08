@@ -67,3 +67,11 @@ $('.shopping-list').on('click', '.shopping-item-toggle', function (event){
   toggleDone(state, liIndex);
   renderList();
 });
+
+//REMOVES items
+$('.shopping-list').on('click', '.shopping-item-delete', function (event){
+  var item = $(this).parent().parent();
+  var liIndex = $('li').index(item);
+  deleteItem(state, liIndex);
+  renderList();
+});
