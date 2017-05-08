@@ -1,66 +1,69 @@
-/********
+/**
  *
- * THREE PURPOSES
- *  1. Add an item
- *  2. Check item
- *  4. Remove item
+ * Global Variabls
  *
- *******/
+ */
+var state     = []; //will hold the items in the list
 
-// STATE
-var state = [];
+var template  = '<li><span class ="shopping-item"></span> <div class = "shopping-item-controls"><button class="shopping-item-toggle"><span class="button-label">check</span></button><button class = "shopping-item-delete"><span class="button-label">delete</span> </button></div></li>';
 
-// FUNCTIONS
-var addItem = function(state, item) {
-  state.push(
-    {
-      itemName: item,
-      checked: false //not checked
-    }
-  );
-};
+/**
+ *
+ * Item Management
+ *
+ */
+function addItem(state, item) {
+  state.push({itemName: item, done: false});
+}
 
+function deleteItem(state, itemIndex) {
+  state.splice(itemIndex, 1);
+}
 
-var item = {itemName:""};
+function toggleDone(state, itemIndex) {
+  if (state[itemIndex].done === true){
+    state[itemIndex].done = false;
+  }
+  else {
+    state[itemIndex].done = true;
+  }
+}
+/**
+ *
+ * RENDER ITEMS
+ *
+ */
+function renderItem(item, index, template){
+  currentItem = $(template);
+  currentItem.find('span.shopping-item').text(item.itemName);
+  if (item.done === true){
+    currentItem.find('span.shopping-item').addClass('shopping-item__checked');
+  }
+  else{
+    currentItem.find('span.shopping-item').removeClass('shopping-item__checked');
+  }
+  return currentItem;
+}
 
-var template = '<li>' +
-  '<span class="shopping-item">' + item.itemName + '</span>' +
-  '<div class="shopping-item-controls">' +
-  '<button class="shopping-item-toggle">' +
-  '<span class="button-label">check</span>' +
-  '</button>' +
-  '<button class="shopping-item-delete">' +
-  '<span class="button-label">delete</span>' +
-  '</button>' +
-  '</div>' +
-  '</li>';
-template = $(template);
-// RENDER
-var renderList = function(state, element) {
-  var currentItem = template.clone();
-  currentItem.find('.shopping-item').html($('#shopping-list-entry').val());
-  currentItem.find('.shopping-item-toggle').on('.click', function() {
-
-      if(currentItem.checked){
-        currentItem.checked = true;
-        currentItem.find('.shopping-item').addClass('shopping-item__checked');
-      }
-      else {
-        currentItem.checked = false;
-        currentItem.find('.shopping-item').removeClass('shopping-item__checked');
-      }
-      return currentItem;
+function renderList() {
+  var itemsHTML = state.map(function(item,index){
+    return renderItem(item, index, template);
   });
-    element.append(currentItem); //creates via template
-};
-// Event listeners
-// Add
+  $('ul').html(itemsHTML);
+}
+//even listeners
+//Adds item to shopping list
 $('#js-shopping-list-form').submit(function(event) {
-    event.preventDefault();
-    addItem(state, $('#shopping-list-entry').val());
-    renderList(state, $('.shopping-list'));
+  event.preventDefault();
+  addItem(state, $('#shopping-list-entry').val());
+  renderList();
+  this.reset();
 });
-//check
-$('.shopping-item-toggle').click(function(){
-  alert("click works");
+
+//checks and unchecks items
+$('.shopping-list').on('click', '.shopping-item-toggle', function (event){
+  var item = $(this).parent().parent();
+  var liIndex = $('li').index(item);
+  toggleDone(state, liIndex);
+  renderList();
 });
