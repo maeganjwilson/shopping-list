@@ -75,3 +75,6 @@ $('.shopping-list').on('click', '.shopping-item-delete', function (event){
   deleteItem(state, liIndex);
   renderList();
 });
+
+//START WITH EMPTY LIST
+renderList();
