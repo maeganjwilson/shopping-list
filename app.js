@@ -62,7 +62,7 @@ $('#js-shopping-list-form').submit(function(event) {
 
 //checks and unchecks items
 $('.shopping-list').on('click', '.shopping-item-toggle', function (event){
-  var item = $(this).parent().parent();
+  var item = $(this).parent().parent(); //HAS TO BE A BETTER WAY
   var liIndex = $('li').index(item);
   toggleDone(state, liIndex);
   renderList();
@@ -70,7 +70,7 @@ $('.shopping-list').on('click', '.shopping-item-toggle', function (event){
 
 //REMOVES items
 $('.shopping-list').on('click', '.shopping-item-delete', function (event){
-  var item = $(this).parent().parent();
+  var item = $(this).parent().parent();//HAS TO BE A BETTER WAY
   var liIndex = $('li').index(item);
   deleteItem(state, liIndex);
   renderList();
